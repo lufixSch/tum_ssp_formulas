@@ -1,0 +1,105 @@
+\documentclass[9pt]{extarticle} % defines the kind of document you want to produce
+
+% Include different packages:
+\usepackage[margin=1cm]{geometry} % set margins
+\usepackage{multicol}
+\usepackage[T1]{fontenc} % for correct hyphenation and T1 encoding
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}           	% include graphics
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{tabularx}
+
+\usepackage{listings}
+\usepackage{color, xcolor}
+\usepackage{blindtext}
+
+%# Colors ------------------------------------------------------------------------
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+\definecolor{DENcol}{RGB}{35,171,196} % Department Colour
+\definecolor{DENcol10}{RGB}{245, 245, 245}
+
+%# Listings -----------------------------------------------------------------------
+\lstMakeShortInline{|}
+
+\lstloadlanguages{Bash,VHDL,Matlab,[ANSI]C,Java,[LaTeX]TeX,Python}
+
+\lstset{
+    frame=top,frame=bottom,
+    basicstyle=\fontsize{11}{11}\normalfont\sffamily,
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{DENcol},
+    stringstyle=\color{mPurple},            % the size of the fonts that are used for the code
+	stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
+	numbersep=6pt,                          % how far the line-numbers are from the code
+	tabsize=2,                              % tab size in blank spaces
+	extendedchars=true,                     %
+	breaklines=true,                        % sets automatic line breaking
+	captionpos=t,                           % sets the caption-position to top
+	mathescape=true,
+	stringstyle=\color{black}\ttfamily,     % Farbe der String
+	showspaces=false,                       % Leerzeichen anzeigen ?
+	showtabs=false,                         % Tabs anzeigen ?
+	xleftmargin=15pt,
+	framexleftmargin=14pt,
+	framexrightmargin=9pt,
+	framexbottommargin=9pt,
+	framextopmargin=9pt,
+	showstringspaces=false,      % Leerzeichen in Strings anzeigen ?
+	numbers = left,
+	linewidth = 150mm,
+	language=Python
+}
+
+%# MDFramed Box style -------------------------------------------------------------
+% Red box
+\mdfdefinestyle{redbox}{%
+		linecolor=red,
+		linewidth=1pt,
+}
+
+% Equation box
+\mdfdefinestyle{eqbox}{%
+		linecolor=black,
+		linewidth=1pt,
+		backgroundcolor=DENcol10
+}
+
+% Blue box
+\mdfdefinestyle{bluebox}{%
+		linecolor=DENcol,
+		linewidth=1pt,
+		backgroundcolor=DENcol10
+}
+
+%# Font Style ---------------------------------------------------------------------
+% Reduce space between section and subsection lines
+\usepackage{titlesec}
+\titleformat{\section}
+	{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{2pt}{*0}{2pt}
+\titleformat{\subsection}
+	{\normalfont\normalsize\bfseries}{\thesubsection}{.2em}{}
+\titlespacing*{\subsection}{0pt}{2pt}{0pt}
+
+
+%\RedeclareSectionCommand[
+%	beforeskip=.75\baselineskip,
+%	afterskip=.5\baselineskip]{section}
+%\RedeclareSectionCommand[
+%	beforeskip=0\baselineskip,
+%	afterskip=0\baselineskip]{subsection}
+
+%# Commands -----------------------------------------------------------------------
+% Matrix in Mathmode
+\newcommand{\mat}[1]{\mathbf{#1}}
