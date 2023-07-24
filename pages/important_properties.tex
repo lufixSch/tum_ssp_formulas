@@ -1,0 +1,64 @@
+\section{Important Properties}
+\begin{mdframed}[style=eqbox]
+  \subsection{Expectation (first order moment)}
+  The expectation of a random variable $X$ is the average value of $X$ over many trials.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
+    \begin{align*}
+      E[X] &= \int_{-\infty}^{\infty} x f_X(x) \text{d}x &\hat{ =}& \sum_{x \in \mathcal{X}} x \cdot P_X(x)\\
+      E[g(X)] &= \int_{-\infty}^{\infty} g(x) f_X(x) \text{d}x &\hat{ =}& \sum_{x \in \mathcal{X}} g(x) \cdot P_X(x)
+  \end{align*}
+  \end{mdframed}
+  \vspace*{-9pt}\begin{align*}
+    E[aX + b] &= aE[X] + b\\
+    E[X + Y] &= E[X] + E[Y]\\
+    E[XY] &= E[X]E[Y] && \text{if~} X \text{~and~} Y \text{~are independent}\\
+    E[g(X)] &= \int_{-\infty}^{\infty} g(x) f_X(x) \text{d}x
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Variance (second order moment)}
+  The variance of a random variable $X$ is the average squared deviation from the mean.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
+    \begin{align*}
+      \text{Var}[X] &= E[(X - E[X])^2] = E[X^2] - E[X]^2\\
+      \text{Var}[\underbar{X}] &= \text{E}[(\underbar{X} - \vec{\mu})(\underbar{X} - \vec{\mu})^T] = \text{E}[\underbar{X}\underbar{X}^T] - \vec{\mu}\vec{\mu}^T
+    \end{align*}
+  \end{mdframed}
+  \vspace*{-9pt}\begin{align*}
+    \text{Var}[X] &= \text{Cov}[X,X]\\
+    \text{Var}[aX + b] &= a^2 \text{Var}[X]\\
+    \text{Var}[X + Y] &= \text{Var}[X] + \text{Var}[Y] + 2\text{Cov}[X,Y]\\
+    \text{Var}[XY] &= E[X^2]E[Y^2] - E[X]^2E[Y]^2 + \text{Cov}[X,Y]^2\\
+    \text{Var}[X] &= E[X^2] - E[X]^2\\
+    \text{Var}\left[\sum_{i=1}^n X_i\right] &= \sum_{i=1}^n \text{Var}[X_i] + \sum_{i \neq j} \text{Cov}[X_i, X_j]
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Covariance}
+  The covariance of two random variables $X$ and $Y$ is a measure of how much one can be expressed by the other.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
+    \begin{align*}
+      \text{Cov}[X,Y] &= E[(X-\mu_X)(Y-\mu_Y)] = E[XY] - \mu_X\mu_Y\\
+      \text{Cov}[\underbar{X},\underbar{Y}] &= \text{E}[(\underbar{X} - \vec{\mu}_X)(\underbar{Y} - \vec{\mu}_Y)^T]
+    \end{align*}
+  \end{mdframed}
+  \vspace*{-9pt}\begin{align*}
+    \text{Cov}[X,Y] &= \text{Cov}[Y,X]\\
+    \text{Cov}[aX + b, cY + d] &= ac \text{Cov}[X,Y]\\
+    \text{Cov}[X + U, Y] &= \text{Cov}[X,Y] + \text{Cov}[U,Y]\\
+    \text{Cov}[\underbar{z}] = \mat{C}_{\underbar{z}} &= \begin{bmatrix}
+      \mat{C}_{\underbar{x}} & \mat{C}_{\underbar{x},\underbar{y}}\\
+      \mat{C}_{\underbar{y},\underbar{x}} & \mat{C}_{\underbar{y}}
+    \end{bmatrix} \text{~with~} \underbar{z} = [\underbar{x}^T, \underbar{y}^T]^T
+  \end{align*}
+  \vspace*{-20pt}\subsubsection{Correlation}
+  The correlation is the normalized covariance.
+  \begin{align*}
+    \rho(X,Y) &= \frac{\text{Cov}[X,Y]}{\sqrt{\text{Var}[X]\text{Var}[Y]}} = \frac{\mat{C}_{X,Y}}{\sigma_X \sigma_Y}
+  \end{align*}
+\end{mdframed}

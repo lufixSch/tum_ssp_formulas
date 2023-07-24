@@ -1,0 +1,83 @@
+\section{Estimation}
+\begin{mdframed}[style=eqbox]
+  \subsection{Estimator Quality}
+  Consistency: $\lim_{n \rightarrow \infty} P(\mid \hat{\theta}_n - \theta \mid > \epsilon) = 0$\\
+  Unbiasedness: $E[\hat{\theta}] = \theta$ with $\text{Bias}[\hat{\theta}] = E[\hat{\theta}] - \theta$\\
+  Variance: $\text{Var}[T] = E[(T - E[T])^2]$
+  \subsubsection{Mean Squared Error (MSE)}
+  The MSE is the expected value of the squared error.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \epsilon[T] &= E[(T - \theta)^2] = \text{Var}[T] + \text{Bias}^2[T]\\
+      \epsilon[\underbar{T}] &= \text{E}[\mid\mid \underbar{T} - \underbar{\theta} \mid\mid^2] = \text{tr}\{E[(\underbar{T} - \underbar{\theta})(\underbar{T} - \underbar{\theta})^T]\}
+    \end{align*}
+  \end{mdframed}
+  \subsubsection{Minimum Mean Squared Error (MMSE)}
+  The MMSE is the minimum MSE over all possible estimators.
+  \begin{align*}
+    \arg \min_T E[(T - \theta)^2]
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Maximum Likelihood Estimation (ML)}
+  The ML estimator is the value of $\theta$ that maximizes the likelihood function $L(x;\theta)$ given $f_X(x; \theta)$.\\[0.25em]
+  \textbf{Likelihood function:}\\
+  $L(x_1, \ldots, x_n; \theta) = f_{X_1, \ldots, X_n}(x_1, \ldots, x_n; \theta)$\\
+  $L(x_1, \ldots, x_n; \theta) = P_\theta(X_1 = x_1, \ldots, X_n = x_n)$\\[0.5em]
+  If $N$ observations are i.i.d.:
+  \vspace*{-4pt}
+  \begin{align*}
+    L(x;\theta) = \prod_{i=1}^N f_{X_i}(x_i; \theta) && l(x;\theta) = \sum_{i=1}^N \log f_{X_i}(x_i; \theta)
+  \end{align*}
+  \textbf{Maximum Likelihood Estimator:}
+  \vspace*{-4pt}
+  \begin{align*}
+    T_{ML} = \arg \max_\theta \{ L(x;\theta) \} &= \arg\max_\theta \{ l(x;\theta)\}\\
+    \frac{\delta L(x;\theta)}{\delta \theta} &= \frac{\delta l(x;\theta)}{\delta \theta} \overset{!}{ =} 0
+  \end{align*}
+  \textbf{Properties:}
+  The ML Estimator is consistent, asymptotically unbiased and asymptotically efficient.
+\end{mdframed}
+\newpage
+% Uniformly Minimum Variance Unbiased Estimator (UMVU)
+\begin{mdframed}[style=eqbox]
+  \subsection{Uniformly Minimum Variance Unbiased Estimator (UMVU)}
+  The UMVU estimator is the unbiased estimator with the smallest variance. (Best unbiased estimator)\\[0.25em]
+  \textbf{Fisher's Information Inequality:} Estimate lower bound for the variance if\\
+  $ L(x, \theta) > 0 \quad \forall x, \theta$\\[0.25em]
+  $ L(x, \theta)$ is twice differentiable in $\theta$\\[0.25em]
+  $ \frac{\delta}{\delta \theta} \int L(x, \theta) \text{d}x = \int \frac{\delta}{\delta \theta} L(x, \theta) \text{d}x$\\[0.5em]
+  \textbf{Score function:}
+  \vspace*{-4pt}
+  \begin{align*}
+    g(x, \theta) = \frac{\delta}{\delta \theta} \log L(x, \theta) = \frac{\frac{\delta}{\delta \theta} L(x, \theta)}{L(x, \theta)} && E[g(x, \theta)] = 0
+  \end{align*}
+  \textbf{Fisher information:}
+  \vspace*{-4pt}
+  \begin{align*}
+    I_F(\theta) := Var[g(X, \theta)] = E[g(x, \theta)^2] = -E\left[\frac{\delta^2}{\delta \theta^2} \log L(x, \theta)\right]
+  \end{align*}
+  \textbf{Cramer-Rao Lower Bound (CRB):}
+  \vspace*{-4pt}
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \text{Var}[T] \geq \left ( \frac{\delta E[T(X)]}{\delta \theta} \right )^2 \frac{1}{I_F(\theta)} && \text{Var}[T] \geq \frac{1}{I_F(\theta)}
+    \end{align*}
+  \end{mdframed}
+  \vspace*{-4pt}\small{with $T$ being unbiased $\implies E[T(X)] = \theta$}\\[0.25em]
+  For $N$ i.i.d. observations: $I_F^{(N)}(x, \theta) = N \cdot I_F(x, \theta)$
+  \subsubsection{Exponential Models}
+  \vspace*{-4pt}
+  \begin{align*}
+    f_X(x; \theta) = \frac{h(x)\exp(a(\theta)t(x))}{\exp(b(\theta))} && I_F(\theta) = \frac{\delta a}{\delta \theta} \frac{\delta E[t(X)]}{\delta \theta}
+  \end{align*}
+  \subsubsection{Useful derivations}
+  Uniform $\mathcal{U}(a,b)$: Not differentiable $\implies$ no $I_F(\theta)$\\[0.25em]
+  Normal $\mathcal{N}(\mu, \sigma^2)$: $g(x,\theta) = \frac{x - \theta}{\sigma^2}$ $I_F(\theta) = \frac{1}{\sigma^2}$\\[0.25em]
+  Binomial $\mathcal{B}(K, \theta)$: $g(x,\theta) = \frac{x}{\theta} - \frac{K-x}{1-\theta}$ $I_F(\theta) = \frac{K}{\theta(1-\theta)}$\\[0.25em]
+\end{mdframed}
+
+% Bayes Estimation (Conditional Mean)

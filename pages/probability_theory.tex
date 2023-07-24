@@ -1,0 +1,140 @@
+\newpage
+
+\section{Probability Theory}
+\begin{mdframed}[style=eqbox]
+\subsection{Combinatorics}
+Possible combinations/variations of choosing $k$ elements out of $n$ elements (distribute $k$ elements into $n$ bins):\\[0.25em]
+\begin{tabularx}{\textwidth}{l|XX}
+  \hline
+  & with repetition & without repetition\\
+  \hline
+  order & $n^k$ & $\frac{n!}{(n-k)!}$\\[0.5em]
+  no order & $\binom{n+k-1}{k}$ & $\binom{n}{k} = \frac{n!}{k!(n-k)!}$\\[0.5em]
+  \hline
+\end{tabularx}\vspace*{0.5em}
+Permutations of $n$ elements: $n!$\\
+Permutations of $n$ elements with $k$ same elements: $\frac{n!}{k_1! \cdot k_2! \cdot \ldots \cdot k_n!}$\\[0.25em]
+Binomialcoefficient: $\binom{n}{k} = \binom{n}{n-k} = \frac{n!}{k!(n-k)!}$\\
+\begin{align*}
+  \binom{n}{0} = 1 & & \binom{n}{1} = n & & \binom{n}{n} = 1\\
+\end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+\subsection{Probability space}
+Sample space: Set of all possible outcomes\\
+$\Omega = \{ \omega_1, \omega_2, \ldots, \omega_n \}$\\[0.25em]
+Event space: Set of all possible events\\
+$\mathbb{F} = \{ A_1, A_2, \ldots, A_n \}$ with $A_i \subseteq \Omega$\\[0.25em]
+Probability measure: Assigns probabilities to events\\
+$P : \mathbb{F} \rightarrow [0,1]$\\[0.25em]
+Random variable: Maps outcomes to events\\
+$X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
+Observations: Single outcome of a random variable\\
+$\{x_1, x_2, \ldots, x_n\} \subseteq \Omega$\\[0.25em]
+Unknown parameters: Parameters of a probability distribution\\
+$\theta \in \Theta$\\[0.25em]
+Estimator: Function of observations that estimates $\theta$\\
+$T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Probability measure}
+  \begin{align*}
+    P(A) = \frac{\mid A \mid}{\mid \Omega \mid} && P(A \cup B) = P(A) + P(B) - P(A \cap B)\\
+  \end{align*}
+  The probability of the event $A$ is the number of outcomes in $A$ divided by the total number of outcomes in $\Omega$
+  \subsubsection{Axioms of Kolmogorov}
+  \begin{align*}
+    \shortintertext{with $A_i \cap A_j = \emptyset$ for $i \neq j$}
+    P(A) \geq 0 && P(\Omega) = 1 && P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)\\
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Distribution}
+  Probabilitydensity function (PDF): \\
+  $f_X(x) = \frac{\text{d} F_X(x)}{\text{d} x}$\\
+  $f_{X,Y}(x,y) = \frac{\text{d}^2 F_{X,Y}(x,y)}{\text{d}x~\text{d}y}$ (Joint PDF)\\[0.5em]
+  Cumulative distribution function (CDF): \\
+  $F_X(x) = P({X \leq x}) = \int_{-\infty}^{x} f_X(t) \text{d} t$\\
+  $F_{X,Y}(x,y) = P({X \leq x, Y \leq y}) = \int_{-\infty}^{x} \int_{-\infty}^{y} f_{X,Y}(s,t) \text{d}s~\text{d}t$
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Conditional Probability}
+  Probability of event $A$ given that event $B$ has occurred:
+  \begin{align*}
+    P(A \mid B) = \frac{P(A \cap B)}{P(B)} && P(A \cap B) = P(A \mid B) \cdot P(B)\\
+  \end{align*}
+  \vspace*{-32pt}
+  \begin{align*}
+    f_{X,Y}(x,y) &= f_{X \mid Y}(x \mid y) \cdot f_Y(y) = f_{Y \mid X}(y \mid x) \cdot f_X(x)\\
+    f_{Y}(y) &= \underbrace{\int f_{X,Y}(x,y) \text{d}x}_{\text{marginalization}} = \int f_{Y \mid X}(y \mid x) \cdot f_X(x) \text{d}x\\
+  \end{align*}\vspace*{-24pt}\\
+  Bayes' Theorem:
+  \vspace*{-4pt}
+  \begin{align*}
+    P(A \mid B) &= \frac{P(B \mid A) \cdot P(A)}{P(B)}\\
+    f_{X \mid Y}(x \mid y) &= \frac{f_{X,Y}(x,y)}{f_Y(y)}
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Independence}
+  $X_1, X_2, \ldots, X_n$ are independent if and only if:
+  \vspace*{-6pt}
+  \begin{align*}
+    F_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} F_{X_i}(x_i)\\
+    p_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} p_{X_i}(x_i)\\
+    f_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} f_{X_i}(x_i)
+  \end{align*}
+\end{mdframed}
+
+\section{Common Distributions}
+\begin{mdframed}[style=eqbox]
+  \subsection{Normal Distribution $\sim \mathcal{N}(\mu, \sigma^2)$}
+  \vspace*{-6pt}
+  \begin{align*}
+    f_X(x) &= \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)\\
+    f_{\vec{X}}(\vec{x}) &= \frac{1}{\sqrt{(2 \pi)^k \det(\mat{C})}} \exp\left(-\frac{1}{2} (\vec{x}-\vec{\mu})^T \mat{C}^{-1} (\vec{x}-\vec{\mu})\right)\\[0.5em]
+    \text{with~} &\det(a \mat{A}) = a^n \det(\mat{A}) \text{~if~} \mat{A} \in \mathbb{R}^{n \times n}
+  \end{align*}
+  \vspace*{-14pt}
+  \begin{align*}
+    E[X] = \mu && \text{Var}[X] = \sigma^2
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Uniform Distribution $\sim \mathcal{U}(a,b)$}
+  \vspace*{-6pt}
+  \begin{align*}
+    f_X(x) = \frac{1}{b-a} && \mu = \frac{a+b}{2} && \sigma^2 = \frac{(b-a)^2}{12}
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Exponential Distribution $\sim \text{Exp}(\lambda)$}
+  \vspace*{-6pt}
+  \begin{align*}
+    f_X(x) = \lambda \exp(-\lambda x) && \mu = \frac{1}{\lambda} && \sigma^2 = \frac{1}{\lambda^2}\\
+    f_X(x; \theta) = \frac{h(x)\exp(a(\theta)t(x))}{\exp(b(\theta))}
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Gamma Distribution $\sim \Gamma(\alpha, \beta)$}
+  \vspace*{-6pt}
+  \begin{align*}
+    f_X(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x) && \mu = \frac{\alpha}{\beta} && \sigma^2 = \frac{\alpha}{\beta^2}
+  \end{align*}
+\end{mdframed}
+\newpage
+\begin{mdframed}[style=eqbox]
+  \subsection{Binomial Distribution $\sim \mathcal{B}(K;\theta)$}
+  \vspace*{-6pt}
+  \begin{align*}
+    f_X(x) = \binom{K}{x} \theta^x (1-\theta)^{K-x} && \mu = K \theta && \sigma^2 = K \theta (1-\theta)
+  \end{align*}
+\end{mdframed}

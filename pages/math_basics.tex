@@ -1,0 +1,121 @@
+\begin{mdframed}[style=redbox]
+  i.i.d: independent and identically distributed
+\end{mdframed}
+
+\section{Math Basics}
+\begin{mdframed}[style=eqbox]
+\subsection*{Binome, Trinome}
+  \begin{align*}
+    (a \pm b)^3 &= a^3 \pm 3a^2b + 3ab^2 \pm b^3 \\
+    (a + b + c)^2 &= a^2 + b^2 + c^2 + 2ab + 2ac + 2bc
+  \end{align*}
+\subsection*{Sequences and Series}
+  \begin{align*}
+    \shortintertext{\scriptsize{~~(Aritmetric Series) ~~~~~~~~~ (Geometric Series) ~~~~~~~ (Exponential Series)}}
+    \sum_{k=1}^n k = \frac{n(n+1)}{2} && \sum_{k = 0}^n q^k = \frac{1 - q^{n+1}}{1 - q} && \sum_{k = 0}^\infty \frac{z^k}{k!} = e^z
+  \end{align*}
+\subsection*{Mean}
+\begin{align*}
+  \mu_{ar} = \frac{1}{N} \sum x_i &\leq& \mu_{geo} = \sqrt[N]{\prod x_i} &\leq& \mu_{har} = \frac{N}{\sum \frac{1}{x_i}}
+\end{align*}
+% Ungleichungen (Englisch)
+\subsection*{Inequalities}
+Cauchy-Schwarz: $\mid \underbar{x}^T \underbar{y} \mid \leq \mid\mid \underbar{x} \mid\mid \cdot \mid\mid \underbar{y} \mid\mid$\\[0.5em]
+Bernoulli: $(1 + x)^n \geq 1 + nx$\\[0.5em]
+Triangle: $\mid a + b \mid \leq \mid a \mid + \mid b \mid$
+\subsection*{Sets}
+De Morgan's Laws: $\overline{A \cup B} = \overline{A} \cap \overline{B}$, $\overline{A \cap B} = \overline{A} \cup \overline{B}$
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+\subsection{Differentiation ($\forall \lambda, \mu \in \mathbb{R}$)}
+\begin{align*}
+  (\lambda f(x) + \mu g(x))' &= \lambda f'(x) + \mu g'(x)\\[0.25em]
+  (f(x) \cdot g(x))' &= f'(x) \cdot g(x) + f(x) \cdot g'(x)\\[0.25em]
+  (f(g(x)))' &= f'(g(x)) \cdot g'(x)\\
+  \left(\frac{f(x)}{g(x)}\right)' &= \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{g(x)^2}
+\end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+\subsection{Integration}
+\begin{align*}
+  % Partielle Integration
+  \int f'(x) \cdot g(x) \,dx &= f(x) \cdot g(x) - \int f(x) \cdot g'(x) \,dx\\[0.25em]
+  % Substitution
+  \int f(g(x)) \cdot g'(x) \,dx &= \int f(u) \,du \quad \text{mit } u = g(x)\\[0.25em]
+\end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=bluebox]
+% Table with important integrals and derivatives (width full page)
+\begin{tabularx}{\textwidth}{XXX}
+  \hline
+  f(x) & F(x) - C & f'(x)\\
+  \hline
+  $x^n$ & $\frac{1}{n+1}x^{n+1}$ & $nx^{n-1}$\\
+  $\log(ax)$ & $x\log(ax) - x$ & $\frac{1}{x}$\\
+  $x \cdot e^x$ & $(x-1)e^x$ & $(x+1)e^x$\\
+  $a^x$ & $\frac{a^x}{\log(a)}$ & $a^x \cdot \log(a)$\\
+  $\sin(x)$ & $-\cos(x)$ & $\cos(x)$\\
+
+  \hline
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+\subsection{Matrices}
+$\mat{A} \in \mathbb{K}^{m \times n} $: Matrix with $m$ rows and $n$ columns
+\begin{align*}
+  (\mat{A} + \mat{B})^T &= \mat{A}^T + \mat{B}^T & (\mat{A} \cdot \mat{B})^T &= \mat{B}^T \cdot \mat{A}^T \\
+  (\mat{A}^T)^{-1} &= (\mat{A}^{ - 1})^T & (\mat{A} \cdot \mat{B})^{-1} &= \mat{B}^{-1} \cdot \mat{A}^{-1}
+\end{align*}
+$\dim(\mat{A}) = n = \text{rank}(\mat{A}) + \dim \text{ker}(\mat{A})$
+
+\subsubsection{Quadratic Matrices}
+$\mat{A} \in \mathbb{K}^{n \times n}$: Square matrix of order $n$\\[0.25em]
+regular/invertible/non-singular: $\det(\mat{A}) \neq 0$, $\text{rank}(\mat{A}) = n$\\
+singular/non-invertible: $\det(\mat{A}) = 0$, $\text{rank}(\mat{A}) < n$\\
+$\mat{A}^{-1}$ exists for regular matrices\\[0.25em]
+orthogonal: $\mat{A}^T \cdot \mat{A} = \mat{A} \cdot \mat{A}^T = \mat{I} \implies \det(\mat{A}) = \pm 1$\\[0.25em]
+symmetric: $\mat{A}^T = \mat{A}$
+
+\subsubsection{Determinant of $\mat{A} \in \mathbb{K}^{n \times n}$}
+$\det{\mat{A}} = \mid \mat{A} \mid$
+\begin{align*}
+  \det \left[\begin{array}{cc}
+    \mat{A} & \mat{0} \\
+    \mat{C} & \mat{D}
+  \end{array}\right] &= \det \left[\begin{array}{cc}
+    \mat{A} & \mat{B} \\
+    \mat{0} & \mat{D}
+  \end{array}\right] = \det(\mat{A}) \cdot \det(\mat{D})\\
+\end{align*}
+$\det{\mat{A}} = \det{\mat{A}^T}$\\
+$\det{(\mat{A} \cdot \mat{B})} = \det{\mat{A}} \cdot \det{\mat{B}} = \det{\mat{B}} \cdot \det{\mat{A}} = \det{(\mat{B} \cdot \mat{A})}$\\[0.25em]
+If $\text{rank}(\mat{A}) < n$, then $\det(\mat{A}) = 0$
+
+\subsubsection{Eigenvalues and Eigenvectors}
+\begin{align*}
+  \mat{A} \cdot \underbar{x} = \lambda \cdot \underbar{x} && \det(\mat{A}) = \prod \lambda_i && \text{tr}\{\mat{A}\} = \sum \lambda_i\\
+  &&\mat{A} = \mat{U} \cdot \mat{\Lambda} \cdot \mat{U}^{T}&&
+\end{align*}
+Eigenvectors of $\mat{A}$ span the range of $\mat{A}$\\
+If only the trivial solution $\lambda = 0$ exists $\implies$ $\underbar{x} \in \text{ker}(\mat{A})$\\[0.25em]
+EW of Triangular/Diagonal Matrix: $\lambda_i = a_{ii}$ (diagonal elements)
+
+\subsubsection{Singularvalues and Singularvectors}
+\begin{align*}
+  \mat{A} = \mat{U} \cdot \mat{\Sigma} \cdot \mat{V}^{T} && \mat{A}^{T} \cdot \mat{A} = \mat{V} \cdot \mat{\Sigma}^{2} \cdot \mat{V}^{T} && \mat{A} \cdot \mat{A}^{T} = \mat{U} \cdot \mat{\Sigma}^{2} \cdot \mat{U}^{T}
+\end{align*}
+Left singular vectors span the range of $\mat{A}$\\
+Right singular vectors span the range of $\mat{A}^{T}$ (domain of $\mat{A}$)\\
+If $\sigma_i = 0$ then $\underbar{v}_i \in \text{ker}(\mat{A})$ and $\underbar{u}_i \in \text{ker}(\mat{A}^{T})$
+
+\subsubsection{Helpful Tricks}
+\vspace*{-10pt}
+\begin{align*}
+  tr(\mat{A}\mat{B}^T + \mat{B}\mat{A}^T) &= 2tr(\mat{A}\mat{B}^T)\\
+  \underbar{a}^T\underbar{b} = \underbar{b}^T\underbar{a} &\implies \underbar{a}^T \mat{M} \underbar{b} &= \underbar{b}^T \mat{M}^T \underbar{a}
+\end{align*}
+\end{mdframed}
