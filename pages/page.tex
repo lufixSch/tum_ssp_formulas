@@ -110,7 +110,14 @@ EW of Triangular/Diagonal Matrix: $\lambda_i = a_{ii}$ (diagonal elements)
 \end{align*}
 Left singular vectors span the range of $\mat{A}$\\
 Right singular vectors span the range of $\mat{A}^{T}$ (domain of $\mat{A}$)\\
-If $\sigma_i = 0$ then $\underbar{v}_i \in \text{ker}(\mat{A})$ and $\underbar{u}_i \in \text{ker}(\mat{A}^{T})$\\[0.25em]
+If $\sigma_i = 0$ then $\underbar{v}_i \in \text{ker}(\mat{A})$ and $\underbar{u}_i \in \text{ker}(\mat{A}^{T})$
+
+\subsubsection{Helpful Tricks}
+\vspace*{-10pt}
+\begin{align*}
+  tr(\mat{A}\mat{B}^T + \mat{B}\mat{A}^T) &= 2tr(\mat{A}\mat{B}^T)\\
+  \underbar{a}^T\underbar{b} = \underbar{b}^T\underbar{a} &\implies \underbar{a}^T \mat{M} \underbar{b} &= \underbar{b}^T \mat{M}^T \underbar{a}
+\end{align*}
 \end{mdframed}
 
 \newpage
@@ -144,6 +151,12 @@ Probability measure: Assigns probabilities to events\\
 $P : \mathbb{F} \rightarrow [0,1]$\\[0.25em]
 Random variable: Maps outcomes to events\\
 $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
+Observations: Single outcome of a random variable\\
+$\{x_1, x_2, \ldots, x_n\} \subseteq \Omega$\\[0.25em]
+Unknown parameters: Parameters of a probability distribution\\
+$\theta \in \Theta$\\[0.25em]
+Estimator: Function of observations that estimates $\theta$\\
+$T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
 \end{mdframed}
 
 \begin{mdframed}[style=eqbox]
@@ -175,11 +188,13 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
   \begin{align*}
     P(A \mid B) = \frac{P(A \cap B)}{P(B)} && P(A \cap B) = P(A \mid B) \cdot P(B)\\
   \end{align*}
+  \vspace*{-32pt}
   \begin{align*}
     f_{X,Y}(x,y) &= f_{X \mid Y}(x \mid y) \cdot f_Y(y) = f_{Y \mid X}(y \mid x) \cdot f_X(x)\\
     f_{Y}(y) &= \underbrace{\int f_{X,Y}(x,y) \text{d}x}_{\text{marginalization}} = \int f_{Y \mid X}(y \mid x) \cdot f_X(x) \text{d}x\\
-  \end{align*}
+  \end{align*}\vspace*{-24pt}\\
   Bayes' Theorem:
+  \vspace*{-4pt}
   \begin{align*}
     P(A \mid B) &= \frac{P(B \mid A) \cdot P(A)}{P(B)}\\
     f_{X \mid Y}(x \mid y) &= \frac{f_{X,Y}(x,y)}{f_Y(y)}
@@ -189,6 +204,7 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
 \begin{mdframed}[style=eqbox]
   \subsection{Independence}
   $X_1, X_2, \ldots, X_n$ are independent if and only if:
+  \vspace*{-6pt}
   \begin{align*}
     F_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} F_{X_i}(x_i)\\
     p_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} p_{X_i}(x_i)\\
@@ -199,18 +215,21 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
 \section{Common Distributions}
 \begin{mdframed}[style=eqbox]
   \subsection{Normal Distribution $\sim \mathcal{N}(\mu, \sigma^2)$}
+  \vspace*{-6pt}
   \begin{align*}
     f_X(x) &= \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)\\
     f_{\vec{X}}(\vec{x}) &= \frac{1}{\sqrt{(2 \pi)^k \det(\mat{C})}} \exp\left(-\frac{1}{2} (\vec{x}-\vec{\mu})^T \mat{C}^{-1} (\vec{x}-\vec{\mu})\right)\\[0.5em]
     \text{with~} &\det(a \mat{A}) = a^n \det(\mat{A}) \text{~if~} \mat{A} \in \mathbb{R}^{n \times n}
   \end{align*}
+  \vspace*{-14pt}
   \begin{align*}
-    E[X] = \mu && \text{Var}[X] = \sigma^2 && \text{Cov}(X,Y) = \text{E}[(X-\mu_X)(Y-\mu_Y)^T]
+    E[X] = \mu && \text{Var}[X] = \sigma^2
   \end{align*}
 \end{mdframed}
 
 \begin{mdframed}[style=eqbox]
   \subsection{Uniform Distribution $\sim \mathcal{U}(a,b)$}
+  \vspace*{-6pt}
   \begin{align*}
     f_X(x) = \frac{1}{b-a} && \mu = \frac{a+b}{2} && \sigma^2 = \frac{(b-a)^2}{12}
   \end{align*}
@@ -218,6 +237,7 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
 
 \begin{mdframed}[style=eqbox]
   \subsection{Exponential Distribution $\sim \text{Exp}(\lambda)$}
+  \vspace*{-6pt}
   \begin{align*}
     f_X(x) = \lambda \exp(-\lambda x) && \mu = \frac{1}{\lambda} && \sigma^2 = \frac{1}{\lambda^2}\\
     f_X(x; \theta) = \frac{h(x)\exp(a(\theta)t(x))}{\exp(b(\theta))}
@@ -226,13 +246,15 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
 
 \begin{mdframed}[style=eqbox]
   \subsection{Gamma Distribution $\sim \Gamma(\alpha, \beta)$}
+  \vspace*{-6pt}
   \begin{align*}
     f_X(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x) && \mu = \frac{\alpha}{\beta} && \sigma^2 = \frac{\alpha}{\beta^2}
   \end{align*}
 \end{mdframed}
-
+\newpage
 \begin{mdframed}[style=eqbox]
   \subsection{Binomial Distribution $\sim \mathcal{B}(K;\theta)$}
+  \vspace*{-6pt}
   \begin{align*}
     f_X(x) = \binom{K}{x} \theta^x (1-\theta)^{K-x} && \mu = K \theta && \sigma^2 = K \theta (1-\theta)
   \end{align*}
@@ -243,12 +265,13 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
   \subsection{Expectation (first order moment)}
   The expectation of a random variable $X$ is the average value of $X$ over many trials.
   \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
     \begin{align*}
       E[X] &= \int_{-\infty}^{\infty} x f_X(x) \text{d}x &\hat{ =}& \sum_{x \in \mathcal{X}} x \cdot P_X(x)\\
       E[g(X)] &= \int_{-\infty}^{\infty} g(x) f_X(x) \text{d}x &\hat{ =}& \sum_{x \in \mathcal{X}} g(x) \cdot P_X(x)
   \end{align*}
   \end{mdframed}
-  \begin{align*}
+  \vspace*{-9pt}\begin{align*}
     E[aX + b] &= aE[X] + b\\
     E[X + Y] &= E[X] + E[Y]\\
     E[XY] &= E[X]E[Y] && \text{if~} X \text{~and~} Y \text{~are independent}\\
@@ -260,12 +283,13 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
   \subsection{Variance (second order moment)}
   The variance of a random variable $X$ is the average squared deviation from the mean.
   \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
     \begin{align*}
       \text{Var}[X] &= E[(X - E[X])^2] = E[X^2] - E[X]^2\\
       \text{Var}[\underbar{X}] &= \text{E}[(\underbar{X} - \vec{\mu})(\underbar{X} - \vec{\mu})^T] = \text{E}[\underbar{X}\underbar{X}^T] - \vec{\mu}\vec{\mu}^T
     \end{align*}
   \end{mdframed}
-  \begin{align*}
+  \vspace*{-9pt}\begin{align*}
     \text{Var}[X] &= \text{Cov}[X,X]\\
     \text{Var}[aX + b] &= a^2 \text{Var}[X]\\
     \text{Var}[X + Y] &= \text{Var}[X] + \text{Var}[Y] + 2\text{Cov}[X,Y]\\
@@ -279,21 +303,22 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
   \subsection{Covariance}
   The covariance of two random variables $X$ and $Y$ is a measure of how much one can be expressed by the other.
   \begin{mdframed}[style=redbox]
+    \vspace*{-11pt}
     \begin{align*}
       \text{Cov}[X,Y] &= E[(X-\mu_X)(Y-\mu_Y)] = E[XY] - \mu_X\mu_Y\\
       \text{Cov}[\underbar{X},\underbar{Y}] &= \text{E}[(\underbar{X} - \vec{\mu}_X)(\underbar{Y} - \vec{\mu}_Y)^T]
     \end{align*}
   \end{mdframed}
-  \begin{align*}
+  \vspace*{-9pt}\begin{align*}
     \text{Cov}[X,Y] &= \text{Cov}[Y,X]\\
     \text{Cov}[aX + b, cY + d] &= ac \text{Cov}[X,Y]\\
     \text{Cov}[X + U, Y] &= \text{Cov}[X,Y] + \text{Cov}[U,Y]\\
-    \text{Cov}[\underbar{z}] &= \mat{C}_{\underbar{z}} = \begin{bmatrix}
+    \text{Cov}[\underbar{z}] = \mat{C}_{\underbar{z}} &= \begin{bmatrix}
       \mat{C}_{\underbar{x}} & \mat{C}_{\underbar{x},\underbar{y}}\\
       \mat{C}_{\underbar{y},\underbar{x}} & \mat{C}_{\underbar{y}}
     \end{bmatrix} \text{~with~} \underbar{z} = [\underbar{x}^T, \underbar{y}^T]^T
   \end{align*}
-  \subsubsection{Correlation}
+  \vspace*{-20pt}\subsubsection{Correlation}
   The correlation is the normalized covariance.
   \begin{align*}
     \rho(X,Y) &= \frac{\text{Cov}[X,Y]}{\sqrt{\text{Var}[X]\text{Var}[Y]}} = \frac{\mat{C}_{X,Y}}{\sigma_X \sigma_Y}
@@ -301,3 +326,85 @@ $X : \Omega \rightarrow \Omega$ with $X(\omega) = x \in A$\\[0.25em]
 \end{mdframed}
 
 \section{Estimation}
+\begin{mdframed}[style=eqbox]
+  \subsection{Estimator Quality}
+  Consistency: $\lim_{n \rightarrow \infty} P(\mid \hat{\theta}_n - \theta \mid > \epsilon) = 0$\\
+  Unbiasedness: $E[\hat{\theta}] = \theta$ with $\text{Bias}[\hat{\theta}] = E[\hat{\theta}] - \theta$\\
+  Variance: $\text{Var}[T] = E[(T - E[T])^2]$
+  \subsubsection{Mean Squared Error (MSE)}
+  The MSE is the expected value of the squared error.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \epsilon[T] &= E[(T - \theta)^2] = \text{Var}[T] + \text{Bias}^2[T]\\
+      \epsilon[\underbar{T}] &= \text{E}[\mid\mid \underbar{T} - \underbar{\theta} \mid\mid^2] = \text{tr}\{E[(\underbar{T} - \underbar{\theta})(\underbar{T} - \underbar{\theta})^T]\}
+    \end{align*}
+  \end{mdframed}
+  \subsubsection{Minimum Mean Squared Error (MMSE)}
+  The MMSE is the minimum MSE over all possible estimators.
+  \begin{align*}
+    \arg \min_T E[(T - \theta)^2]
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Maximum Likelihood Estimation (ML)}
+  The ML estimator is the value of $\theta$ that maximizes the likelihood function $L(x;\theta)$ given $f_X(x; \theta)$.\\[0.25em]
+  \textbf{Likelihood function:}\\
+  $L(x_1, \ldots, x_n; \theta) = f_{X_1, \ldots, X_n}(x_1, \ldots, x_n; \theta)$\\
+  $L(x_1, \ldots, x_n; \theta) = P_\theta(X_1 = x_1, \ldots, X_n = x_n)$\\[0.5em]
+  If $N$ observations are i.i.d.:
+  \vspace*{-4pt}
+  \begin{align*}
+    L(x;\theta) = \prod_{i=1}^N f_{X_i}(x_i; \theta) && l(x;\theta) = \sum_{i=1}^N \log f_{X_i}(x_i; \theta)
+  \end{align*}
+  \textbf{Maximum Likelihood Estimator:}
+  \vspace*{-4pt}
+  \begin{align*}
+    T_{ML} = \arg \max_\theta \{ L(x;\theta) \} &= \arg\max_\theta \{ l(x;\theta)\}\\
+    \frac{\delta L(x;\theta)}{\delta \theta} &= \frac{\delta l(x;\theta)}{\delta \theta} \overset{!}{ =} 0
+  \end{align*}
+  \textbf{Properties:}
+  The ML Estimator is consistent, asymptotically unbiased and asymptotically efficient.
+\end{mdframed}
+\newpage
+% Uniformly Minimum Variance Unbiased Estimator (UMVU)
+\begin{mdframed}[style=eqbox]
+  \subsection{Uniformly Minimum Variance Unbiased Estimator (UMVU)}
+  The UMVU estimator is the unbiased estimator with the smallest variance. (Best unbiased estimator)\\[0.25em]
+  \textbf{Fisher's Information Inequality:} Estimate lower bound for the variance if\\
+  $ L(x, \theta) > 0 \quad \forall x, \theta$\\[0.25em]
+  $ L(x, \theta)$ is twice differentiable in $\theta$\\[0.25em]
+  $ \frac{\delta}{\delta \theta} \int L(x, \theta) \text{d}x = \int \frac{\delta}{\delta \theta} L(x, \theta) \text{d}x$\\[0.5em]
+  \textbf{Score function:}
+  \vspace*{-4pt}
+  \begin{align*}
+    g(x, \theta) = \frac{\delta}{\delta \theta} \log L(x, \theta) = \frac{\frac{\delta}{\delta \theta} L(x, \theta)}{L(x, \theta)} && E[g(x, \theta)] = 0
+  \end{align*}
+  \textbf{Fisher information:}
+  \vspace*{-4pt}
+  \begin{align*}
+    I_F(\theta) := Var[g(X, \theta)] = E[g(x, \theta)^2] = -E\left[\frac{\delta^2}{\delta \theta^2} \log L(x, \theta)\right]
+  \end{align*}
+  \textbf{Cramer-Rao Lower Bound (CRB):}
+  \vspace*{-4pt}
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \text{Var}[T] \geq \left ( \frac{\delta E[T(X)]}{\delta \theta} \right )^2 \frac{1}{I_F(\theta)} && \text{Var}[T] \geq \frac{1}{I_F(\theta)}
+    \end{align*}
+  \end{mdframed}
+  \vspace*{-4pt}\small{with $T$ being unbiased $\implies E[T(X)] = \theta$}\\[0.25em]
+  For $N$ i.i.d. observations: $I_F^{(N)}(x, \theta) = N \cdot I_F(x, \theta)$
+  \subsubsection{Exponential Models}
+  \vspace*{-4pt}
+  \begin{align*}
+    f_X(x; \theta) = \frac{h(x)\exp(a(\theta)t(x))}{\exp(b(\theta))} && I_F(\theta) = \frac{\delta a}{\delta \theta} \frac{\delta E[t(X)]}{\delta \theta}
+  \end{align*}
+  \subsubsection{Useful derivations}
+  Uniform $\mathcal{U}(a,b)$: Not differentiable $\implies$ no $I_F(\theta)$\\[0.25em]
+  Normal $\mathcal{N}(\mu, \sigma^2)$: $g(x,\theta) = \frac{x - \theta}{\sigma^2}$ $I_F(\theta) = \frac{1}{\sigma^2}$\\[0.25em]
+  Binomial $\mathcal{B}(K, \theta)$: $g(x,\theta) = \frac{x}{\theta} - \frac{K-x}{1-\theta}$ $I_F(\theta) = \frac{K}{\theta(1-\theta)}$\\[0.25em]
+\end{mdframed}
+
+% Bayes Estimation (Conditional Mean)
