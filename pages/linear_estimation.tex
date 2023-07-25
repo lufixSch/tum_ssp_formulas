@@ -85,8 +85,43 @@
     \hat{y} = \mu_y + \underbar{c}_{xy}^T \mat{C}_x^{-1} (\underbar{x} - \underbar{\mu}_x) &= \underbrace{\underbar{c}_{xy}^T \mat{C}_x^{-1}}_{\underbar{t}^T} \underbar{x} + \underbrace{\mu_y - \underbar{c}_{xy}^T \mat{C}_x^{-1} \underbar{\mu}_x}_{m}\\
     E\left[\mid\mid\underbar{y} - \underbar{x}^T \underbar{t} - m\mid\mid^2\right] &= c_y^2 - \underbar{c}_{xy}^T \mat{C}_x^{-1} \underbar{c}_{xy}
   \end{align*}
-  \textbf{Hint:} Use general form of $\hat{y}$ then insert variables according to the given problem.
+  \textbf{Hint:} Use general form of $\hat{y}$ then insert variables according to the given problem.\\
+  \textbf{Properties:} The LMMSE estimator depends on first and second order moments of the distribution. It does not consider the distribution of the random variables. The LMMSE ist not a random variable.
 \end{mdframed}
-\newpage
 
 % Matched Filter
+\begin{mdframed}[style=eqbox]
+  \subsection{Matched Filter}
+  The optimal linear filter for maximizing the SNR of a signal in the presence of additive stochastic noise.\\[0.25em]
+  For a channel $\underbar{y} = \underbar{h} x + \underbar{n}$ filtered with $\mat{T}$: $\mat{T} \underbar{y} = \mat{T} \underbar{h} x + \mat{T} \underbar{n}$\\
+  Such that $\hat{\underbar{h}} = \mat{T} \underbar{y}$ is the optimal estimate of $\underbar{h}$.
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \mat{T}_{\text{MF}} \implies \max_{\mat{T}} \left\{ \frac{E[ (\mat{T}\underbar{h} x)^2]}{E[(\mat{T}\underbar{n})^2 ]} \right\} =
+      \max_{\mat{T}} \left\{ \frac{\mid E[ \hat{\underbar{h}}^T \underbar{h}]\mid^2}{\text{tr}\left\{\text{Var}[\mat{T}\underbar{n}] \right\}} \right\}
+    \end{align*}
+  \end{mdframed}
+  \textbf{With MIMO} channel $\mat{H} \in \mathbb{K}^{M \times N}$ ($N$ inputs, $M$ outputs, $K$ Observations)
+  \begin{align*}
+    \mat{Y} = \mat{H} \mat{S} + \mat{N} \implies \underbar{y} = (\mat{S}^T \otimes \mat{I}_{M})\underbar{h} + \underbar{n}
+  \end{align*}\vspace*{-16pt}\\
+  \tiny All matrices $\mat{Y}, \mat{H}, \mat{N}$ are stacked column-wise into vectors $\underbar{y}, \underbar{h}, \underbar{n}$ \normalsize
+  \begin{align*}
+    \hat{\underbar{h}} = \mat{T} \underbar{y} && \mat{T}_{\text{MF}} = \mat{C}_{h} (\mat{S}^T \otimes \mat{I}_{M})^T \mat{C}_{n}^{-1}
+  \end{align*}
+\end{mdframed}
+
+% Comparison of Estimators
+\begin{mdframed}[style=eqbox]
+  \subsection{Comparison}
+  With MIMO channel $\mat{H} \in \mathbb{K}^{M \times N}$ ($N$ inputs, $M$ outputs, $K$ Observations)\\[0.25em]
+  \begin{tabularx}{\textwidth}{XXX}
+    \textbf{Estimator} & \textbf{Average squared bias} & \textbf{Variance}\\
+    \hline
+    \vspace{1pt}  ML &\vspace{1pt} $0$ &\vspace{1pt} $N \cdot M \cdot \gamma$\\[0.5em]
+    Matched Filter & $\sum_{i=1}^{KM} \lambda_i \left(\cfrac{\lambda_i}{\lambda_1} -1 \right)$ & $\sum_{i=1}^{KM} \cfrac{\lambda_i^2}{\lambda_1^2} \gamma$\\[0.5em]
+    MMSE & $\sum_{i=1}^{KM} \cfrac{\lambda_i}{(1+\gamma^{-1} \lambda_i)^2}$ & $\sum_{i=1}^{KM} \cfrac{\gamma}{(1 + \gamma \lambda_i^{-1})^2}$\\[0.5em]
+  \end{tabularx}
+  \textit{Note:} $\gamma = \cfrac{\sigma_n^2}{K \sigma_s^2}$\\
+\end{mdframed}
