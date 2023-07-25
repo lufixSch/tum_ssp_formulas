@@ -1,0 +1,92 @@
+\section{Linear Estimation}
+\begin{mdframed}[style=eqbox]
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \hat{y} = \mat{x}^T \underbar{t} + m &&
+      \hat{y} = \mat{X'} \underbar{t}' &&
+      \underbar{t}' = \begin{bmatrix}
+        \underbar{t}\\
+        m
+      \end{bmatrix} &&
+      \mat{X'} = \begin{bmatrix}
+        \mat{X} & \underbar{1}
+      \end{bmatrix}
+    \end{align*}
+  \end{mdframed}
+  Given $N$ observations $y_i$ based on a input $\underbar{x}_i$.
+  \begin{align*}
+    \underbar{y} = \begin{bmatrix}
+      y_1\\
+      \vdots\\
+      y_N
+    \end{bmatrix} && \mat{X} = \begin{bmatrix}
+      \mat{x}_1^T\\
+      \vdots&\\
+      \mat{x}_N^T
+    \end{bmatrix}
+  \end{align*}
+  \textbf{Estimation of $\underbar{x}$:}
+  \vspace*{-4pt}
+  \begin{align*}
+    \hat{\underline{y}} = \underline{x}^T \mat{T} &\implies \hat{\underline{x}} = \mat{T}^T \underline{y}
+  \end{align*}
+\end{mdframed}
+
+% Least Squares Estimation
+\begin{mdframed}[style=eqbox]
+  \subsection{Least Squares Estimation (LSE)}
+  Minimize the squared error between the observations $\underbar{y}$ and the model $\mat{X} \underbar{t}$.\\[0.25em]
+  \textbf{LS Error:} $\min \left[\sum (y_i - \underbar{x}_i^T \underbar{t})^2\right] = \min \left[\mid\mid \underbar{y} - \mat{X} \underbar{t} \mid\mid^2\right]$
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \underbar{t}_{\text{LS}} = \underbrace{(\mat{X}^T \mat{X})^{-1} \mat{X}^T}_{\text{Pseudo inverse~} X^+} \underbar{y} && \hat{\underbar{y}}_{\text{LS}} = \mat{X} \underbar{t}_{\text{LS}}
+    \end{align*}
+  \end{mdframed}
+  \textbf{Orthogonality principle:}
+  \vspace*{-4pt}
+  \begin{align*}
+    \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \perp \text{range}[\mat{X}] &\implies \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \in \text{ker}[\mat{X}^T]\\
+    \mat{X}^T(\underbar{y} - \mat{X}\underbar{t}_{\text{LS}}) = \mat{0} &\implies \mat{X}^T \underbar{y} = \mat{X}^T \mat{X} \underbar{t}_{\text{LS}}\\
+  \end{align*}\vspace*{-24pt}\\
+  \small{if $N \geq \text{rank}[\mat{X}]$ (All columns of $\mat{X}$ are independent, $(\mat{X}^T \mat{X})^{-1}$ exists)}
+\end{mdframed}
+
+% Linear Minimum Mean Square Error Estimation
+\begin{mdframed}[style=eqbox]
+  \subsection{Linear Minimum Mean Square Error Estimation (LMMSE)}
+  Estimate $y$ with linear estimator $\underbar{t}$ such that $\hat{y} = \underbar{x}^T \underbar{t} + m$\\[0.25em]
+  \textit{Note: The underlying model is not necessarily linear.}
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \hat{\underbar{y}}_{\text{LMMSE}} = \arg \min_{\underbar{t}, m} E\left[\mid\mid\underbar{y} - \underbar{x}^T \underbar{t} - m\mid\mid^2\right]
+    \end{align*}
+  \end{mdframed}
+  \textbf{Joint Variable:}
+  \vspace*{-4pt}
+  \begin{align*}
+    \underbar{z} = \begin{bmatrix}
+      \underbar{x}\\
+      y
+    \end{bmatrix}&&
+    \underbar{\mu_z} = \begin{bmatrix}
+      \underbar{\mu}_x\\
+      \mu_y
+    \end{bmatrix} && \mat{C}_z = \begin{bmatrix}
+      \mat{C}_x & \underbar{c}_{xy}\\
+      \underbar{c}_{xy}^T & c_y^2
+    \end{bmatrix}
+  \end{align*}
+  LMMSE Estimation of $y$ given $\underbar{x}$:
+  \vspace*{-4pt}
+  \begin{align*}
+    \hat{y} = \mu_y + \underbar{c}_{xy}^T \mat{C}_x^{-1} (\underbar{x} - \underbar{\mu}_x) &= \underbrace{\underbar{c}_{xy}^T \mat{C}_x^{-1}}_{\underbar{t}^T} \underbar{x} + \underbrace{\mu_y - \underbar{c}_{xy}^T \mat{C}_x^{-1} \underbar{\mu}_x}_{m}\\
+    E\left[\mid\mid\underbar{y} - \underbar{x}^T \underbar{t} - m\mid\mid^2\right] &= c_y^2 - \underbar{c}_{xy}^T \mat{C}_x^{-1} \underbar{c}_{xy}
+  \end{align*}
+  \textbf{Hint:} Use general form of $\hat{y}$ then insert variables according to the given problem.
+\end{mdframed}
+\newpage
+
+% Matched Filter

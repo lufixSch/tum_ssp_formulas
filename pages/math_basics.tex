@@ -89,7 +89,7 @@ $\det{\mat{A}} = \mid \mat{A} \mid$
   \end{array}\right] &= \det \left[\begin{array}{cc}
     \mat{A} & \mat{B} \\
     \mat{0} & \mat{D}
-  \end{array}\right] = \det(\mat{A}) \cdot \det(\mat{D})\\
+  \end{array}\right] = \det(\mat{A}) \cdot \det(\mat{D})
 \end{align*}
 $\det{\mat{A}} = \det{\mat{A}^T}$\\
 $\det{(\mat{A} \cdot \mat{B})} = \det{\mat{A}} \cdot \det{\mat{B}} = \det{\mat{B}} \cdot \det{\mat{A}} = \det{(\mat{B} \cdot \mat{A})}$\\[0.25em]
@@ -111,6 +111,12 @@ EW of Triangular/Diagonal Matrix: $\lambda_i = a_{ii}$ (diagonal elements)
 Left singular vectors span the range of $\mat{A}$\\
 Right singular vectors span the range of $\mat{A}^{T}$ (domain of $\mat{A}$)\\
 If $\sigma_i = 0$ then $\underbar{v}_i \in \text{ker}(\mat{A})$ and $\underbar{u}_i \in \text{ker}(\mat{A}^{T})$
+
+\subsection{Pseudo Inverse ($\mat{A} \in \mathbb{K}^{m \times n}$)}
+$(\mat{A}^T\mat{A})^{-1}$ exists $\implies \mat{A}^+_{\text{left}} = (\mat{A}^T\mat{A})^{-1}\mat{A}^T$ $m \geq n$\\
+Is orthogonal projector onto $\text{range}[\mat{A}]$ \\[0.25em]
+$(\mat{A}\mat{A}^T)^{-1}$ exists $\implies \mat{A}^+_{\text{right}} = \mat{A}^T(\mat{A}\mat{A}^T)^{-1}$ $m \leq n$\\
+Is orthogonal projector onto $\text{range}[\mat{A}^T]$
 
 \subsubsection{Helpful Tricks}
 \vspace*{-10pt}

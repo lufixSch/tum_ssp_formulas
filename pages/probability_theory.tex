@@ -14,9 +14,10 @@ Possible combinations/variations of choosing $k$ elements out of $n$ elements (d
 \end{tabularx}\vspace*{0.5em}
 Permutations of $n$ elements: $n!$\\
 Permutations of $n$ elements with $k$ same elements: $\frac{n!}{k_1! \cdot k_2! \cdot \ldots \cdot k_n!}$\\[0.25em]
-Binomialcoefficient: $\binom{n}{k} = \binom{n}{n-k} = \frac{n!}{k!(n-k)!}$\\
+Binomialcoefficient: $\binom{n}{k} = \binom{n}{n-k} = \frac{n!}{k!(n-k)!}$
+\vspace*{-4pt}
 \begin{align*}
-  \binom{n}{0} = 1 & & \binom{n}{1} = n & & \binom{n}{n} = 1\\
+  \binom{n}{0} = 1 & & \binom{n}{1} = n & & \binom{n}{n} = 1
 \end{align*}
 \end{mdframed}
 
@@ -40,14 +41,16 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
 
 \begin{mdframed}[style=eqbox]
   \subsection{Probability measure}
+  \vspace*{-6pt}
   \begin{align*}
-    P(A) = \frac{\mid A \mid}{\mid \Omega \mid} && P(A \cup B) = P(A) + P(B) - P(A \cap B)\\
+    P(A) = \frac{\mid A \mid}{\mid \Omega \mid} && P(A \cup B) = P(A) + P(B) - P(A \cap B)
   \end{align*}
   The probability of the event $A$ is the number of outcomes in $A$ divided by the total number of outcomes in $\Omega$
   \subsubsection{Axioms of Kolmogorov}
+  \vspace*{-6pt}
   \begin{align*}
     \shortintertext{with $A_i \cap A_j = \emptyset$ for $i \neq j$}
-    P(A) \geq 0 && P(\Omega) = 1 && P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)\\
+    P(A) \geq 0 && P(\Omega) = 1 && P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)
   \end{align*}
 \end{mdframed}
 
