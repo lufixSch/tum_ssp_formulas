@@ -75,11 +75,20 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
     f_{X,Y}(x,y) &= f_{X \mid Y}(x \mid y) \cdot f_Y(y) = f_{Y \mid X}(y \mid x) \cdot f_X(x)\\
     f_{Y}(y) &= \underbrace{\int f_{X,Y}(x,y) \text{d}x}_{\text{marginalization}} = \int f_{Y \mid X}(y \mid x) \cdot f_X(x) \text{d}x\\
   \end{align*}\vspace*{-24pt}\\
-  Bayes' Theorem:
+  \textbf{Bayes' Theorem:}
   \vspace*{-4pt}
   \begin{align*}
     P(A \mid B) &= \frac{P(B \mid A) \cdot P(A)}{P(B)}\\
     f_{X \mid Y}(x \mid y) &= \frac{f_{X,Y}(x,y)}{f_Y(y)}
+  \end{align*}
+  \textbf{Conditional Stochastic Independence:}\\
+  $X$ and $Z$ are conditionally independent given $Y$: $X \arrow Y \arrow Z$
+  \vspace*{-4pt}
+  \begin{align*}
+    f_{Z,X \mid Y}(z,x \mid y) &= f_{Z \mid Y}(z \mid y) \cdot f_{X \mid Y}(x \mid y)\\
+    f_{Z \mid Y, X}(z \mid y, x) &= f_{Z \mid Y}(z \mid y)\\
+    f_{X \mid Z,Y}(x \mid z, y) &= f_{X \mid Y}(x \mid y)\\
+    f_{Z \mid X,Y}(z \mid x, y) &= f_{Z \mid Y}(z \mid y)
   \end{align*}
 \end{mdframed}
 
@@ -126,6 +135,7 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
   \end{align*}
 \end{mdframed}
 
+\newpage
 \begin{mdframed}[style=eqbox]
   \subsection{Gamma Distribution $\sim \Gamma(\alpha, \beta)$}
   \vspace*{-6pt}
@@ -133,7 +143,6 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
     f_X(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x) && \mu = \frac{\alpha}{\beta} && \sigma^2 = \frac{\alpha}{\beta^2}
   \end{align*}
 \end{mdframed}
-\newpage
 \begin{mdframed}[style=eqbox]
   \subsection{Binomial Distribution $\sim \mathcal{B}(K;\theta)$}
   \vspace*{-6pt}

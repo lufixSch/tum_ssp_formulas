@@ -1,0 +1,109 @@
+\section{Sequences}
+\begin{mdframed}[style=eqbox]
+  \subsection{Random Sequences}
+  Sequence of random variables $X_1, X_2, \ldots, X_N$. For example multiple dice rolls after each other.
+  \subsection{Markov Sequences}
+  Random sequence where value depends only on the previous value.\\
+  1. state: $f_{X_1}(x_1)$\\
+  2. state: $f_{X_2}(x_2 \mid x_1)$\\
+  n. state: $f_{X_n}(x_n \mid x_{n-1}, \ldots, x_1) = f_{X_n}(x_n \mid x_{n-1})$
+  \subsubsection{Hidden Markov Chain}
+  Markov sequence where the state is not directly observable. $X$ can only be guessed from $Y$.
+  \vspace*{-4pt}
+  \begin{align*}
+    X_n = G_n(X_{n-1}) && Y_n = H_n(X_n)
+  \end{align*}
+  State-transition PDF: $f_{X_n\mid X_{n-1}}(x_n \mid x_{n-1})$\\[0.25em]
+  \textbf{Estimation:}
+  \vspace*{-4pt}
+  \begin{align*}
+    f_{X_n \mid Y_n} \propto \underbrace{f_{Y_n \mid X_n}}_{\text{likelihood}} \int_{\mathbb{X}} \underbrace{f_{X_n \mid X_{n-1}}}_{\text{state transition}} \underbrace{f_{X_{n-1} \mid Y_{n-1}}}_{\text{last state}} \text{d}x_{n-1}
+  \end{align*}\vspace*{-16pt}
+  \begin{align*}
+    \hat{x}_{n \mid n} &= E[X_n \mid Y_1, \ldots, Y_n] = E[X_n \mid Y_{(n)}] && \hat{y}_{n \mid n} = E[Y_n \mid Y_{(n)}]
+  \end{align*}
+  \textit{Hint:} Estimators like CM and LMMSE can be used to estimate $\hat{\underbar{x}}_{n \mid n}$
+\end{mdframed}
+
+% Kalman-Filter
+\begin{mdframed}[style=eqbox]
+\subsection{Kalman-Filter}
+Recursively estimate the next state of a Gaussian Markov sequence.
+\vspace*{-6pt}
+\begin{align*}
+  \underbar{x}_n = \mat{G}_n \underbar{x}_{n-1} + \underbar{v}_n && \underbar{y}_n = \mat{H}_n \underbar{x}_n + \underbar{w}_n
+\end{align*}
+\small With $\underbar{v}_n \sim \mathcal{N}(\underbar{\mu}_{v_n}, \mat{C}_{v_n})$ and $\underbar{w}_n \sim \mathcal{N}(\underbar{\mu}_{w_n}, \mat{C}_{w_n})$ \normalsize\\[0.25em]
+\textbf{0. Step: Initialization}
+\begin{align*}
+  \hat{\underbar{x}}_{0 \mid - 1} &= E[\underbar{x}_0] && \mat{C}_{x_{0 \mid - 1}} = \text{Var}[\underbar{x}_0]
+\end{align*}
+\textbf{1. Step: Prediction}
+\begin{align*}
+  \hat{\underbar{x}}_{n \mid n-1} &= \mat{G}_n \hat{\underbar{x}}_{n-1 \mid n-1} && \mat{C}_{x_{n \mid n-1}} = \mat{G}_n \mat{C}_{x_{n-1 \mid n-1}} \mat{G}_n^T + \mat{C}_{v_n}
+\end{align*}
+\textbf{2. Step: Update}
+\begin{align*}
+  \hat{\underbar{x}}_{n \mid n} &= \hat{\underbar{x}}_{n \mid n-1} + \mat{K}_n (\underbar{y}_n - \mat{H}_n \hat{\underbar{x}}_{n \mid n-1})\\
+  \mat{C}_{x_{n \mid n}} &= \mat{C}_{x_{n \mid n-1}} - \mat{K}_n \mat{H}_n \mat{C}_{x_{n \mid n-1}}\\
+  \mat{K}_n &= \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T (\underbrace{\mat{H}_n \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T + \mat{C}_{w_n}}_{\mat{C}_{\underbar{y}_{n \mdi n}}})^{-1} = \mat{C}_{x_n \Delta y_n} \mat{C}_{\Delta y_n}^{-1}
+\end{align*}
+\textbf{Inovation:} Closness of the measurement to the prediction
+\vspace*{-4pt}
+\begin{align*}
+  \Delta \underbar{y}_n = \underbar{y}_n - \hat{\underbar{y}}_{n \mid n - 1} = \underbar{y}_n - \mat{H}_n \hat{\underbar{x}}_{n \mid n-1}
+\end{align*}
+\end{mdframed}
+
+% Particle Filter
+\begin{mdframed}[style=eqbox]
+\subsection{Particle Filter}
+For non linear and non Gaussian problems. Approximate the PDF with a set of particles.
+\vspace*{-4pt}
+\begin{align*}
+  \underbar{x}_n = \underbar{g}_n(\underbar{x}_{n-1}, \underbar{v}_n) && \underbar{y}_n = \underbar{h}_n(\underbar{x}_n, \underbar{w}_n)
+\end{align*}
+$N$ particles $\underbar{x}_n^{(i)}$ with weights $w_n^{(i)}$ at step $n$.
+\textbf{Monte-Carlo-Integration:}
+\vspace*{-4pt}
+\begin{align*}
+  \int g(x) f(x) \text{d}x \approx \frac{1}{N} \sum_{i=1}^N g(x^{(i)}) && \text{with} \quad x^{(i)} \sim f(x)
+\end{align*}
+\textbf{Importance Sampling:} Instead of sampling from $f(x)$ sample from $q(x)$ (\textbf{Importance Density})
+\vspace*{-4pt}
+\begin{align*}
+  \int g(x) f(x) \text{d}x = \int g(x) \frac{f(x)}{q(x)} q(x) \text{d}x \approx \frac{1}{N} \sum_{i=1}^N g(x^{(i)}) \frac{f(x^{(i)})}{q(x^{(i)})}
+\end{align*}
+\subsubsection{Wheight Update}
+\vspace*{-12pt}
+\begin{align*}
+  \tilde{w}_n^{(i)} &= \frac{f(x_n^{(i)})}{q(x_n^{(i)})} && w_n^{(i)} = \frac{\tilde{w}_n^{(i)}}{\sum_{j=1}^N \tilde{w}_n^{(j)}} && \sum_{i=1}^N w^{(i)} \delta(x - x^{(i)}) \approx f(x)
+\end{align*}
+\begin{align*}
+  \tilde{w}_n^{(i)} &= \frac{f_{X_n,X_{(n - 1)}\mid Y_{(n)}(x_n^{(i)}, x_{n-1}^{(i)})}}{q_{X_n,X_{(n - 1)}\mid Y_{(n)}}(x_n^{(i)}, x_{n-1}^{(i)})}\\
+   &\approx \tilde{w}_{n-1}^{(i)} \frac{f_{Y_n \mid X_n}(y_n \mid x_n^{(i)})f_{X_n \mid X_{n - 1}}(x_n^{(i)} \mid x_{n-1}^{(i)})}{q_{X_n \mid X_{n - 1}, Y_n}(x_n^{(i)} \mid x_{n-1}^{(i)}, y_n)}
+\end{align*}
+\textbf{Degeneracy:} Monotonic increase of the weights over time. $\implies$ only some particles have a significant weight.
+\begin{align*}
+  \frac{\max\{\sigma_{\text{est}}^2\}}{\sigma_{\text{est}^2}} = \frac{1}{\sum^N_{i=1} (w_n^{(i)})^2} \leq w_{\text{thr}}
+\end{align*}
+\textbf{Resampling:} Particles with low weight are replaced by particles with high weight at the position of the high weight particles (with some noise).
+\end{mdframed}
+%w_{n-1}^{(i)} \frac{f_{y_n \mid x_n}(y_n \mid x_n^{(i)})}{q_{x_n \mid y_{1:n}}(x_n^{(i)} \mid y_{1:n})}\\
+
+\newpage
+% Kalman-Filter (non Gaussian)
+\begin{mdframed}[style=eqbox]
+  For non linear problems the Kalman-Filter can be modified with the Extended Kalman-Filter (EKF) or the Unscented Kalman-Filter (UKF).
+
+  \subsection{Extended Kalman-Filter}
+  Linear approximation of non-linear functions for every step.
+  \vspace*{-4pt}
+  \begin{align*}
+    \underbar{x}_n = \underbar{g}_n \underbar{x}_{n-1} + \underbar{v}_n && \underbar{y}_n = \underbar{h}_n \underbar{x}_n + \underbar{w}_n\\
+    \text{with} \quad \underbar{g}_n = \frac{\delta \underbar{g}_n}{\delta \underbar{x}} \vert_{x_{n}} \quad &&\text{and} \quad \underbar{h}_n = \frac{\delta \underbar{h}_n}{\delta \underbar{x}} \vert_{x_{n}}
+  \end{align*}
+
+  \subsection{Unscented Kalman-Filter}
+  Approximation of desired PDF with gaussian PDF.\\
+\end{mdframed}
