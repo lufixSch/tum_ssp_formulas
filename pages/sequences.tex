@@ -24,6 +24,21 @@
   \end{align*}
   \textit{Hint:} Estimators like CM and LMMSE can be used to estimate $\hat{\underbar{x}}_{n \mid n}$
 \end{mdframed}
+% Kalman-Filter (non Gaussian)
+\begin{mdframed}[style=eqbox]
+  For non linear problems the Kalman-Filter can be modified with the Extended Kalman-Filter (EKF) or the Unscented Kalman-Filter (UKF).
+
+  \subsection{Extended Kalman-Filter}
+  Linear approximation of non-linear functions for every step.
+  \vspace*{-4pt}
+  \begin{align*}
+    \underbar{x}_n = \underbar{g}_n \underbar{x}_{n-1} + \underbar{v}_n && \underbar{y}_n = \underbar{h}_n \underbar{x}_n + \underbar{w}_n\\
+    \text{with} \quad \underbar{g}_n = \frac{\delta \underbar{g}_n}{\delta \underbar{x}} \vert_{x_{n}} \quad &&\text{and} \quad \underbar{h}_n = \frac{\delta \underbar{h}_n}{\delta \underbar{x}} \vert_{x_{n}}
+  \end{align*}
+
+  \subsection{Unscented Kalman-Filter}
+  Approximation of desired PDF with gaussian PDF.\\
+\end{mdframed}
 % Kalman-Filter
 \begin{mdframed}[style=eqbox]
 \subsection{Kalman-Filter}
@@ -89,19 +104,4 @@ $N$ particles $\underbar{x}_n^{(i)}$ with weights $w_n^{(i)}$ at step $n$.
 \textbf{Resampling:} Particles with low weight are replaced by particles with high weight at the position of the high weight particles (with some noise).
 \end{mdframed}
 %w_{n-1}^{(i)} \frac{f_{y_n \mid x_n}(y_n \mid x_n^{(i)})}{q_{x_n \mid y_{1:n}}(x_n^{(i)} \mid y_{1:n})}\\
-\newpage
-% Kalman-Filter (non Gaussian)
-\begin{mdframed}[style=eqbox]
-  For non linear problems the Kalman-Filter can be modified with the Extended Kalman-Filter (EKF) or the Unscented Kalman-Filter (UKF).
-
-  \subsection{Extended Kalman-Filter}
-  Linear approximation of non-linear functions for every step.
-  \vspace*{-4pt}
-  \begin{align*}
-    \underbar{x}_n = \underbar{g}_n \underbar{x}_{n-1} + \underbar{v}_n && \underbar{y}_n = \underbar{h}_n \underbar{x}_n + \underbar{w}_n\\
-    \text{with} \quad \underbar{g}_n = \frac{\delta \underbar{g}_n}{\delta \underbar{x}} \vert_{x_{n}} \quad &&\text{and} \quad \underbar{h}_n = \frac{\delta \underbar{h}_n}{\delta \underbar{x}} \vert_{x_{n}}
-  \end{align*}
-
-  \subsection{Unscented Kalman-Filter}
-  Approximation of desired PDF with gaussian PDF.\\
-\end{mdframed}
+%\newpage

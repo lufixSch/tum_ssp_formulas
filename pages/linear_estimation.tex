@@ -33,25 +33,18 @@
     \hat{\underline{y}} = \underline{x}^T \mat{T} &\implies \hat{\underline{x}} = \mat{T}^T \underline{y}
   \end{align*}
 \end{mdframed}
-
-% Least Squares Estimation
+% Comparison of Estimators
 \begin{mdframed}[style=eqbox]
-  \subsection{Least Squares Estimation (LSE)}
-  Minimize the squared error between the observations $\underbar{y}$ and the model $\mat{X} \underbar{t}$.\\[0.25em]
-  \textbf{LS Error:} $\min \left[\sum (y_i - \underbar{x}_i^T \underbar{t})^2\right] = \min \left[\mid\mid \underbar{y} - \mat{X} \underbar{t} \mid\mid^2\right]$
-  \begin{mdframed}[style=redbox]
-    \vspace*{-10pt}
-    \begin{align*}
-      \underbar{t}_{\text{LS}} = \underbrace{(\mat{X}^T \mat{X})^{-1} \mat{X}^T}_{\text{Pseudo inverse~} X^+} \underbar{y} && \hat{\underbar{y}}_{\text{LS}} = \mat{X} \underbar{t}_{\text{LS}}
-    \end{align*}
-  \end{mdframed}
-  \textbf{Orthogonality principle:}
-  \vspace*{-4pt}
-  \begin{align*}
-    \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \perp \text{range}[\mat{X}] &\implies \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \in \text{ker}[\mat{X}^T]\\
-    \mat{X}^T(\underbar{y} - \mat{X}\underbar{t}_{\text{LS}}) = \mat{0} &\implies \mat{X}^T \underbar{y} = \mat{X}^T \mat{X} \underbar{t}_{\text{LS}}\\
-  \end{align*}\vspace*{-24pt}\\
-  \small{if $N \geq \text{rank}[\mat{X}]$ (All columns of $\mat{X}$ are independent, $(\mat{X}^T \mat{X})^{-1}$ exists)}
+  \subsection{Comparison}
+  With MIMO channel $\mat{H} \in \mathbb{K}^{M \times N}$ ($N$ inputs, $M$ outputs, $K$ Observations)\\[0.25em]
+  \begin{tabularx}{\textwidth}{XXX}
+    \textbf{Estimator} & \textbf{Average squared bias} & \textbf{Variance}\\
+    \hline
+    \vspace{1pt}  ML &\vspace{1pt} $0$ &\vspace{1pt} $N \cdot M \cdot \gamma$\\[0.5em]
+    Matched Filter & $\sum_{i=1}^{KM} \lambda_i \left(\cfrac{\lambda_i}{\lambda_1} -1 \right)$ & $\sum_{i=1}^{KM} \cfrac{\lambda_i^2}{\lambda_1^2} \gamma$\\[0.5em]
+    MMSE & $\sum_{i=1}^{KM} \cfrac{\lambda_i}{(1+\gamma^{-1} \lambda_i)^2}$ & $\sum_{i=1}^{KM} \cfrac{\gamma}{(1 + \gamma \lambda_i^{-1})^2}$\\[0.5em]
+  \end{tabularx}
+  \textit{Note:} $\gamma = \cfrac{\sigma_n^2}{K \sigma_s^2}$
 \end{mdframed}
 % Linear Minimum Mean Square Error Estimation
 \begin{mdframed}[style=eqbox]
@@ -90,6 +83,26 @@
   \textbf{Properties:} The LMMSE estimator depends on first and second order moments of the distribution. It does not consider the distribution of the random variables. The LMMSE ist not a random variable.\\
   The LMMSE estimator is MMSE (CM Estimator) if the underlying model is linear (jointly Gaussian).
 \end{mdframed}
+
+% Least Squares Estimation
+\begin{mdframed}[style=eqbox]
+  \subsection{Least Squares Estimation (LSE)}
+  Minimize the squared error between the observations $\underbar{y}$ and the model $\mat{X} \underbar{t}$.\\[0.25em]
+  \textbf{LS Error:} $\min \left[\sum (y_i - \underbar{x}_i^T \underbar{t})^2\right] = \min \left[\mid\mid \underbar{y} - \mat{X} \underbar{t} \mid\mid^2\right]$
+  \begin{mdframed}[style=redbox]
+    \vspace*{-10pt}
+    \begin{align*}
+      \underbar{t}_{\text{LS}} = \underbrace{(\mat{X}^T \mat{X})^{-1} \mat{X}^T}_{\text{Pseudo inverse~} X^+} \underbar{y} && \hat{\underbar{y}}_{\text{LS}} = \mat{X} \underbar{t}_{\text{LS}}
+    \end{align*}
+  \end{mdframed}
+  \textbf{Orthogonality principle:}
+  \vspace*{-4pt}
+  \begin{align*}
+    \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \perp \text{range}[\mat{X}] &\implies \underbar{y} - \mat{X}\underbar{t}_{\text{LS}} \in \text{ker}[\mat{X}^T]\\
+    \mat{X}^T(\underbar{y} - \mat{X}\underbar{t}_{\text{LS}}) = \mat{0} &\implies \mat{X}^T \underbar{y} = \mat{X}^T \mat{X} \underbar{t}_{\text{LS}}\\
+  \end{align*}\vspace*{-24pt}\\
+  \small{if $N \geq \text{rank}[\mat{X}]$ (All columns of $\mat{X}$ are independent, $(\mat{X}^T \mat{X})^{-1}$ exists)}
+\end{mdframed}
 %\newpage
 % Matched Filter
 \begin{mdframed}[style=eqbox]
@@ -112,17 +125,4 @@
   \begin{align*}
     \hat{\underbar{h}} = \mat{T} \underbar{y} && \mat{T}_{\text{MF}} = \mat{C}_{h} (\mat{S}^T \otimes \mat{I}_{M})^T \mat{C}_{n}^{-1}
   \end{align*}
-\end{mdframed}
-% Comparison of Estimators
-\begin{mdframed}[style=eqbox]
-  \subsection{Comparison}
-  With MIMO channel $\mat{H} \in \mathbb{K}^{M \times N}$ ($N$ inputs, $M$ outputs, $K$ Observations)\\[0.25em]
-  \begin{tabularx}{\textwidth}{XXX}
-    \textbf{Estimator} & \textbf{Average squared bias} & \textbf{Variance}\\
-    \hline
-    \vspace{1pt}  ML &\vspace{1pt} $0$ &\vspace{1pt} $N \cdot M \cdot \gamma$\\[0.5em]
-    Matched Filter & $\sum_{i=1}^{KM} \lambda_i \left(\cfrac{\lambda_i}{\lambda_1} -1 \right)$ & $\sum_{i=1}^{KM} \cfrac{\lambda_i^2}{\lambda_1^2} \gamma$\\[0.5em]
-    MMSE & $\sum_{i=1}^{KM} \cfrac{\lambda_i}{(1+\gamma^{-1} \lambda_i)^2}$ & $\sum_{i=1}^{KM} \cfrac{\gamma}{(1 + \gamma \lambda_i^{-1})^2}$\\[0.5em]
-  \end{tabularx}
-  \textit{Note:} $\gamma = \cfrac{\sigma_n^2}{K \sigma_s^2}$
 \end{mdframed}

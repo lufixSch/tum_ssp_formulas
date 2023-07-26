@@ -21,6 +21,18 @@
   \end{align*}
   An estimator is MMSE if it minimizes the MSE for all $\theta$.
 \end{mdframed}
+% Comparison of Estimators
+\begin{mdframed}[style=eqbox]
+  \subsection{Comparison of Estimators}
+  Estimate mean $\theta$ of $X$ with prior knowledge $\Theta \sim \mathcal{N}(\mu, \sigma_\Theta^2)$ and $X \sim \mathcal{N}(\theta, \sigma_X^2)$. For $N$ i.i.d. observations $x_i$
+  \vspace*{-4pt}
+  \begin{align*}
+    \hat{\theta}_\text{CM} &= \frac{N \sigma_\Theta^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \hat{\theta}_{\text{ML}} + \frac{\sigma_X^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \mu\\[ -4pt]
+    \hat{\theta}_\text{ML} &= \frac{1}{N} \sum_{i=1}^N x_i
+  \end{align*}\vspace*{-12pt}\\
+  For large $N$ or $\sigma_\Theta^2 \gg \sigma_{X\mid\theta}^2$ the ML estimator used.\\
+  For small $N$ large $\sigma_{X\mid\theta}^2$ or small $\sigma_\Theta^2$ the knowledge about $\Theta$ is used to improve estimation.
+\end{mdframed}
 % Maximum Likelihood Estimation (ML)
 \begin{mdframed}[style=eqbox]
   \subsection{Maximum Likelihood Estimation (ML)}
@@ -109,17 +121,4 @@
   \small{$\implies$ Error has no correlation with the estimator or random variable}\normalsize\\[0.25em]
   \textbf{Properties:}
   The CM ist LMMSE if it is linear in $X$ e.q. the estimator is a linear function of $X$
-\end{mdframed}
-% Comparison of Estimators
-\begin{mdframed}[style=eqbox]
-  \subsection{Comparison of Estimators}
-  Estimate mean $\theta$ of $X$ with prior knowledge $\Theta \sim \mathcal{N}(\mu, \sigma_\Theta^2)$ and $X \sim \mathcal{N}(\theta, \sigma_X^2)$.\\[0.25em]
-  For $N$ i.i.d. observations $x_i$
-  \vspace*{-4pt}
-  \begin{align*}
-    \hat{\theta}_\text{CM} &= \frac{N \sigma_\Theta^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \hat{\theta}_{\text{ML}} + \frac{\sigma_X^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \mu\\[ -4pt]
-    \hat{\theta}_\text{ML} &= \frac{1}{N} \sum_{i=1}^N x_i
-  \end{align*}\vspace*{-12pt}\\
-  For large $N$ or $\sigma_\Theta^2 \gg \sigma_{X\mid\theta}^2$ the ML estimator used.\\
-  For small $N$ large $\sigma_{X\mid\theta}^2$ or small $\sigma_\Theta^2$ the knowledge about $\Theta$ is used to improve estimation.
 \end{mdframed}

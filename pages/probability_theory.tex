@@ -1,4 +1,4 @@
-\newpage
+%\newpage
 
 \section{Probability Theory}
 \begin{mdframed}[style=eqbox]
@@ -55,6 +55,17 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
 \end{mdframed}
 
 \begin{mdframed}[style=eqbox]
+  \subsection{Independence}
+  $X_1, X_2, \ldots, X_n$ are independent if and only if:
+  \vspace*{-6pt}
+  \begin{align*}
+    F_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} F_{X_i}(x_i)\\
+    p_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} p_{X_i}(x_i)\\
+    f_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} f_{X_i}(x_i)
+  \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=eqbox]
   \subsection{Distribution}
   Probabilitydensity function (PDF): \\
   $f_X(x) = \frac{\text{d} F_X(x)}{\text{d} x}$\\
@@ -92,17 +103,6 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
   \end{align*}
 \end{mdframed}
 
-\begin{mdframed}[style=eqbox]
-  \subsection{Independence}
-  $X_1, X_2, \ldots, X_n$ are independent if and only if:
-  \vspace*{-6pt}
-  \begin{align*}
-    F_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} F_{X_i}(x_i)\\
-    p_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} p_{X_i}(x_i)\\
-    f_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} f_{X_i}(x_i)
-  \end{align*}
-\end{mdframed}
-
 \section{Common Distributions}
 \begin{mdframed}[style=eqbox]
   \subsection{Normal Distribution $\sim \mathcal{N}(\mu, \sigma^2)$}
@@ -125,7 +125,6 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
     f_X(x) = \frac{1}{b-a} && \mu = \frac{a+b}{2} && \sigma^2 = \frac{(b-a)^2}{12}
   \end{align*}
 \end{mdframed}
-
 \begin{mdframed}[style=eqbox]
   \subsection{Exponential Distribution $\sim \text{Exp}(\lambda)$}
   \vspace*{-6pt}
@@ -134,8 +133,6 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
     f_X(x; \theta) = \frac{h(x)\exp(a(\theta)t(x))}{\exp(b(\theta))}
   \end{align*}
 \end{mdframed}
-
-\newpage
 \begin{mdframed}[style=eqbox]
   \subsection{Gamma Distribution $\sim \Gamma(\alpha, \beta)$}
   \vspace*{-6pt}
@@ -143,6 +140,7 @@ $T: \mathbb{X} \rightarrow \Theta \implies \hat{\theta} = T(X)$
     f_X(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} \exp(-\beta x) && \mu = \frac{\alpha}{\beta} && \sigma^2 = \frac{\alpha}{\beta^2}
   \end{align*}
 \end{mdframed}
+\newpage
 \begin{mdframed}[style=eqbox]
   \subsection{Binomial Distribution $\sim \mathcal{B}(K;\theta)$}
   \vspace*{-6pt}
