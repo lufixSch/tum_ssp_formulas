@@ -1,8 +1,9 @@
 \section{Estimation}
 \begin{mdframed}[style=eqbox]
   \subsection{Estimator Quality}
-  Consistency: $\lim_{n \rightarrow \infty} P(\mid \hat{\theta}_n - \theta \mid > \epsilon) = 0$\\
-  Unbiasedness: $E[\hat{\theta}] = \theta$ with $\text{Bias}[\hat{\theta}] = E[\hat{\theta}] - \theta$\\
+  Consistency: $\lim_{N \to \infty} \text{Var} \left[ T \right] = 0$ or $\lim_{N \to \infty} T = \theta$\\
+  Unbiasedness: $E[T] = \theta$ with $\text{Bias}[T] = E[T] - \theta$\\
+  Efficiency: $\sqrt{N} E[T(x_1 \ldots x_N)-\theta]\overset{N \to \infty}{\sim} \mathcal{N}(0,I^{(1)}_F$)\\
   Variance: $\text{Var}[T] = E[(T - E[T])^2]$
   \subsubsection{Mean Squared Error (MSE)}
   The MSE is the expected value of the squared error.
@@ -20,7 +21,7 @@
   \end{align*}
   An estimator is MMSE if it minimizes the MSE for all $\theta$.
 \end{mdframed}
-
+% Maximum Likelihood Estimation (ML)
 \begin{mdframed}[style=eqbox]
   \subsection{Maximum Likelihood Estimation (ML)}
   The ML estimator is the value of $\theta$ that maximizes the likelihood function $L(x;\theta)$ given $f_X(x; \theta)$.\\[0.25em]
@@ -42,14 +43,13 @@
   The ML Estimator is consistent, asymptotically unbiased and asymptotically efficient.
 \end{mdframed}
 \newpage
-
 % Uniformly Minimum Variance Unbiased Estimator (UMVU)
 \begin{mdframed}[style=eqbox]
   \subsection{Uniformly Minimum Variance Unbiased Estimator (UMVU)}
   The UMVU estimator is the unbiased estimator with the smallest variance. (Best unbiased estimator)\\[0.25em]
   \textbf{Fisher's Information Inequality:} Estimate lower bound for the variance if\\
   $ L(x, \theta) > 0 \quad \forall x, \theta$\\[0.25em]
-  $ L(x, \theta)$ is twice differentiable in $\theta$\\[0.25em]
+  $ L(x, \theta)$ is differentiable in respect to $\theta$\\[0.25em]
   $ \frac{\delta}{\delta \theta} \int L(x, \theta) \text{d}x = \int \frac{\delta}{\delta \theta} L(x, \theta) \text{d}x$\\[0.5em]
   \textbf{Score function:}
   \vspace*{-4pt}
@@ -69,7 +69,7 @@
       \text{Var}[T] \geq \left ( \frac{\delta E[T(X)]}{\delta \theta} \right )^2 \frac{1}{I_F(\theta)} && \text{Var}[T] \geq \frac{1}{I_F(\theta)}
     \end{align*}
   \end{mdframed}
-  \vspace*{-4pt}\small{with $T$ being unbiased $\implies E[T(X)] = \theta$}\\[0.25em]
+  \vspace*{-4pt}\small{with $T$ being unbiased $\implies E[T(X)] = \theta$}\normalsize\\[0.25em]
   For $N$ i.i.d. observations: $I_F^{(N)}(x, \theta) = N \cdot I_F(x, \theta)$
   \subsubsection{Exponential Models}
   \vspace*{-4pt}
@@ -79,9 +79,8 @@
   \subsubsection{Useful derivations}
   Uniform $\mathcal{U}(a,b)$: Not differentiable $\implies$ no $I_F(\theta)$\\[0.25em]
   Normal $\mathcal{N}(\mu, \sigma^2)$: $g(x,\theta) = \frac{x - \theta}{\sigma^2}$ $I_F(\theta) = \frac{1}{\sigma^2}$\\[0.25em]
-  Binomial $\mathcal{B}(K, \theta)$: $g(x,\theta) = \frac{x}{\theta} - \frac{K-x}{1-\theta}$ $I_F(\theta) = \frac{K}{\theta(1-\theta)}$\\[0.25em]
+  Binomial $\mathcal{B}(K, \theta)$: $g(x,\theta) = \frac{x}{\theta} - \frac{K-x}{1-\theta}$ $I_F(\theta) = \frac{K}{\theta(1-\theta)}$
 \end{mdframed}
-
 % Bayes Estimation (Conditional Mean)
 \begin{mdframed}[style=eqbox]
   \subsection{Bayes Estimation (Conditional Mean)}
@@ -93,36 +92,34 @@
     T_{CM} : x &\mapsto E[\Theta \mid X = x] = \int \theta f_{\Theta \mid X}(\theta \mid x) \text{d}\theta\\
     f_{\Theta \mid X}(\theta \mid x) &= \frac{f_{X \mid \Theta}(x \mid \theta) f_\Theta(\theta)}{\int_\Theta f_{X, \theta}(x, \theta)\text{d}\theta} = \frac{f_{X \mid \Theta}(x \mid \theta) f_\Theta(\theta)}{f_X(x)}\\
   \end{align*}\vspace*{-24pt}\\
-  \small{with $f_X(x) = \text{const.} \implies$ can be replaced by a factor $\frac{1}{\gamma}$. $\gamma$ can be determined such that $\int_\Theta f_{\Theta \mid X}(\theta \mid x)\text{d}\theta = 1$}\\[0.5em]
+  \small{with $f_X(x) = \text{const.} \implies$ can be replaced by a factor $\frac{1}{\gamma}$. $\gamma$ can be determined such that $\int_\Theta f_{\Theta \mid X}(\theta \mid x)\text{d}\theta = 1$}\normalsize\\[0.5em]
   MSE if $\Theta \sim \mathcal{N}(\mu, \sigma_\Theta^2)$, $X \sim \mathcal{N}(\mu, \sigma_X^2)$: $E[\text{Var}[\Theta \mid X]]$ \\[0.5em]
   \textbf{Jointly Gaussian:} ($\Theta, X \sim \mathcal{N})$
+  \vspace*{-4pt}
   \begin{align*}
     T_{CM} = E[\Theta \mid X = x] &= \underbar{\mu_\Theta} + \mat{C}_{\Theta X} \mat{C}_X^{-1} \underbrace{(\underbar{x} - \underbar{\mu}_X)}_{\Delta \underbar{x}}\\
-    E[\mid\mid T_{CM} - \Theta \mid\mid^2] &= \text{tr}\{\mat{C}_{\Theta\mid X = x}\}
-  \end{align*}
-  \begin{align*}
-    \mat{C}_{\Theta\mid X} = \mat{C}_\Theta - \mat{C}_{\Theta X} \mat{C}_X^{-1} \mat{C}_{X\Theta}\\
-    \underbar{\mu}_{\Theta\mid X} = \underbar{\mu}_\Theta + \mat{C}_{\Theta X} \mat{C}_X^{-1} (\underbar{x} - \underbar{\mu}_X)
+    E[\mid\mid T_{CM} - \Theta \mid\mid^2] &= \text{tr}\{\mat{C}_{\Theta\mid X = x}\}\\
+    \mat{C}_{\Theta\mid X} &= \mat{C}_\Theta - \mat{C}_{\Theta X} \mat{C}_X^{-1} \mat{C}_{X\Theta}
   \end{align*}
   \textbf{Orthogonality Principle:}
+  \vspace*{-4pt}
   \begin{align*}
     T_{CM}(X) - \Theta \perp h(X) \implies E[(T_{CM}(X) - \Theta)h(X)] = 0
-  \end{align*}
-  \small{$\implies$ Error has no correlation with the estimator or random variable}\\[0.5em]
+  \end{align*}\vspace*{-18pt}\\
+  \small{$\implies$ Error has no correlation with the estimator or random variable}\normalsize\\[0.25em]
   \textbf{Properties:}
-  The CM Estimator is consistent, asymptotically unbiased and asymptotically efficient.
   The CM ist LMMSE if it is linear in $X$ e.q. the estimator is a linear function of $X$
 \end{mdframed}
-
+% Comparison of Estimators
 \begin{mdframed}[style=eqbox]
   \subsection{Comparison of Estimators}
   Estimate mean $\theta$ of $X$ with prior knowledge $\Theta \sim \mathcal{N}(\mu, \sigma_\Theta^2)$ and $X \sim \mathcal{N}(\theta, \sigma_X^2)$.\\[0.25em]
   For $N$ i.i.d. observations $x_i$
   \vspace*{-4pt}
   \begin{align*}
-    \hat{\theta}_\text{CM} &= \frac{N \sigma_\Theta^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \hat{\theta}_{\text{ML}} + \frac{\sigma_X^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \mu\\
+    \hat{\theta}_\text{CM} &= \frac{N \sigma_\Theta^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \hat{\theta}_{\text{ML}} + \frac{\sigma_X^2}{N \sigma_\Theta^2 + \sigma_{X\mid\theta}^2} \mu\\[ -4pt]
     \hat{\theta}_\text{ML} &= \frac{1}{N} \sum_{i=1}^N x_i
-  \end{align*}
+  \end{align*}\vspace*{-12pt}\\
   For large $N$ or $\sigma_\Theta^2 \gg \sigma_{X\mid\theta}^2$ the ML estimator used.\\
   For small $N$ large $\sigma_{X\mid\theta}^2$ or small $\sigma_\Theta^2$ the knowledge about $\Theta$ is used to improve estimation.
 \end{mdframed}

@@ -24,7 +24,6 @@
   \end{align*}
   \textit{Hint:} Estimators like CM and LMMSE can be used to estimate $\hat{\underbar{x}}_{n \mid n}$
 \end{mdframed}
-
 % Kalman-Filter
 \begin{mdframed}[style=eqbox]
 \subsection{Kalman-Filter}
@@ -46,7 +45,7 @@ Recursively estimate the next state of a Gaussian Markov sequence.
 \begin{align*}
   \hat{\underbar{x}}_{n \mid n} &= \hat{\underbar{x}}_{n \mid n-1} + \mat{K}_n (\underbar{y}_n - \mat{H}_n \hat{\underbar{x}}_{n \mid n-1})\\
   \mat{C}_{x_{n \mid n}} &= \mat{C}_{x_{n \mid n-1}} - \mat{K}_n \mat{H}_n \mat{C}_{x_{n \mid n-1}}\\
-  \mat{K}_n &= \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T (\underbrace{\mat{H}_n \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T + \mat{C}_{w_n}}_{\mat{C}_{\underbar{y}_{n \mdi n}}})^{-1} = \mat{C}_{x_n \Delta y_n} \mat{C}_{\Delta y_n}^{-1}
+  \mat{K}_n &= \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T (\underbrace{\mat{H}_n \mat{C}_{x_{n \mid n-1}} \mat{H}_n^T + \mat{C}_{w_n}}_{\mat{C}_{y_{n \mid n - 1}}})^{-1} = \mat{C}_{x_n \Delta y_n} \mat{C}_{\Delta y_n}^{-1}
 \end{align*}
 \textbf{Inovation:} Closness of the measurement to the prediction
 \vspace*{-4pt}
@@ -90,7 +89,6 @@ $N$ particles $\underbar{x}_n^{(i)}$ with weights $w_n^{(i)}$ at step $n$.
 \textbf{Resampling:} Particles with low weight are replaced by particles with high weight at the position of the high weight particles (with some noise).
 \end{mdframed}
 %w_{n-1}^{(i)} \frac{f_{y_n \mid x_n}(y_n \mid x_n^{(i)})}{q_{x_n \mid y_{1:n}}(x_n^{(i)} \mid y_{1:n})}\\
-
 \newpage
 % Kalman-Filter (non Gaussian)
 \begin{mdframed}[style=eqbox]

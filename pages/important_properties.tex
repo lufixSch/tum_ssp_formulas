@@ -62,3 +62,14 @@
     \rho(X,Y) &= \frac{\text{Cov}[X,Y]}{\sqrt{\text{Var}[X]\text{Var}[Y]}} = \frac{\mat{C}_{X,Y}}{\sigma_X \sigma_Y}
   \end{align*}
 \end{mdframed}
+
+\begin{mdframed}[style=eqbox]
+  \subsection{Sample Correlation and Covariance}
+  The sample covariance is the covariance of two random variables $X$ and $Y$ estimated from a sample of $N$ observations.\\
+  The sample correlation is the normalized sample covariance.
+  \vspace*{-4pt}
+  \begin{align*}
+    \hat{\mat{C}}_{X,Y} &= \frac{1}{N} \sum_{i=1}^N (\underbar{x}_i - \underbar{\mu}_X)(\underbar{y}_i - \underbar{\mu}_Y)^T\\
+    \hat{\mat{R}}_{X,Y} &= \frac{\hat{\mat{C}}_{X,Y}}{\sqrt{\hat{\mat{C}}_{X,X}\hat{\mat{C}}_{Y,Y}}} = \frac{1}{N} \sum_{i=1}^N \underbar{x}_i \underbar{y}_i^T
+  \end{align*}
+\end{mdframed}

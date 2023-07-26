@@ -15,6 +15,7 @@
     \end{align*}
   \end{mdframed}
   Given $N$ observations $y_i$ based on a input $\underbar{x}_i$.
+  \vspace*{-4pt}
   \begin{align*}
     \underbar{y} = \begin{bmatrix}
       y_1\\
@@ -52,12 +53,12 @@
   \end{align*}\vspace*{-24pt}\\
   \small{if $N \geq \text{rank}[\mat{X}]$ (All columns of $\mat{X}$ are independent, $(\mat{X}^T \mat{X})^{-1}$ exists)}
 \end{mdframed}
-
 % Linear Minimum Mean Square Error Estimation
 \begin{mdframed}[style=eqbox]
   \subsection{Linear Minimum Mean Square Error Estimation (LMMSE)}
   Estimate $y$ with linear estimator $\underbar{t}$ such that $\hat{y} = \underbar{x}^T \underbar{t} + m$\\[0.25em]
   \textit{Note: The underlying model is not necessarily linear.}
+  \vspace*{-4pt}
   \begin{mdframed}[style=redbox]
     \vspace*{-10pt}
     \begin{align*}
@@ -86,9 +87,10 @@
     E\left[\mid\mid\underbar{y} - \underbar{x}^T \underbar{t} - m\mid\mid^2\right] &= c_y^2 - \underbar{c}_{xy}^T \mat{C}_x^{-1} \underbar{c}_{xy}
   \end{align*}
   \textbf{Hint:} Use general form of $\hat{y}$ then insert variables according to the given problem.\\
-  \textbf{Properties:} The LMMSE estimator depends on first and second order moments of the distribution. It does not consider the distribution of the random variables. The LMMSE ist not a random variable.
+  \textbf{Properties:} The LMMSE estimator depends on first and second order moments of the distribution. It does not consider the distribution of the random variables. The LMMSE ist not a random variable.\\
+  The LMMSE estimator is MMSE (CM Estimator) if the underlying model is linear (jointly Gaussian).
 \end{mdframed}
-
+%\newpage
 % Matched Filter
 \begin{mdframed}[style=eqbox]
   \subsection{Matched Filter}
@@ -111,7 +113,6 @@
     \hat{\underbar{h}} = \mat{T} \underbar{y} && \mat{T}_{\text{MF}} = \mat{C}_{h} (\mat{S}^T \otimes \mat{I}_{M})^T \mat{C}_{n}^{-1}
   \end{align*}
 \end{mdframed}
-
 % Comparison of Estimators
 \begin{mdframed}[style=eqbox]
   \subsection{Comparison}
@@ -123,5 +124,5 @@
     Matched Filter & $\sum_{i=1}^{KM} \lambda_i \left(\cfrac{\lambda_i}{\lambda_1} -1 \right)$ & $\sum_{i=1}^{KM} \cfrac{\lambda_i^2}{\lambda_1^2} \gamma$\\[0.5em]
     MMSE & $\sum_{i=1}^{KM} \cfrac{\lambda_i}{(1+\gamma^{-1} \lambda_i)^2}$ & $\sum_{i=1}^{KM} \cfrac{\gamma}{(1 + \gamma \lambda_i^{-1})^2}$\\[0.5em]
   \end{tabularx}
-  \textit{Note:} $\gamma = \cfrac{\sigma_n^2}{K \sigma_s^2}$\\
+  \textit{Note:} $\gamma = \cfrac{\sigma_n^2}{K \sigma_s^2}$
 \end{mdframed}
